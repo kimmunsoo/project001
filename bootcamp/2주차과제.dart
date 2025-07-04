@@ -27,11 +27,13 @@ void attackMonster(Monster monster){
     damage = 0;
     print("몬스터가 너무 강력합니다.");
     print("$name이(가) 몬스터에게 $damage 만큼 피해를 입혔습니다.");
-  }
+  }else{
   // 3.4 피해를 입은 만큼 몬스터의 체력이 차감됨
   // 3.5 몬스터의 남은 체력
   int lasthealth = monster.health - damage;
-}
+  print("몬스터의 남은 체력이 $lasthealth만큼 남았습니다.");
+  }
+} // 여기까지 진행 
 
 }
 
@@ -77,35 +79,7 @@ class Monster {
     print(" $name - 체력: $health, 공격력: $attack, 방어력: $defense ");
   } 
 }
-/*
-void loadMonsterStats() {
 
-//2.1 메모장에 있는 몬스터정보를 불러온다.
-  try {
-
-    final file = File('lib/monsters.txt');
-    final contents = file.readAsStringSync(); // 한줄씩 변환
-    List<Monster> monsterlist =[];
-    final stats = contents.split('\n'); // 변환한 각각의 데이터 사이에 "," 삽입
-
-    if (stats.length != 3) throw FormatException('Invalid character data');
-  
-    String name = (stats[0]);
-    int health = int.parse(stats[1]);
-    int attack = int.parse(stats[2]);
-
-    
-    monsterlist.add(Monster(name,health,attack));
-  
-    print("$monsterlist");
-    //
-
-  } catch (e) {
-    print('몬스터 데이터를 불러오는 데 실패했습니다: $e');
-    exit(1);
-  }
-}
-*/
 
 //2.1 monsters.txt를 Monster 클래스 생성자로 만듬
 List<Monster> loadMonsterStats() {
