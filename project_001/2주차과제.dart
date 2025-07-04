@@ -4,15 +4,15 @@ import 'dart:io';
 import 'dart:math';
 
 class Character{
-String name = '용사';
-int health = 0;
-int attack = 0;
-int defense = 0;
+String name;
+int health ;
+int attack ;
+int defense ;
 
 Character(this.name,this.health,this.attack,this.defense);
 
 // 1.3 용사 정보를 불러오고 showStatus를 출력
-void CharaterStatus() {
+void CharacterStatus() {
   print("용사의 이름은 $name , 체력: $health, 공격력: $attack, 방어력: $defense ");
 } 
 
@@ -37,28 +37,26 @@ void attackMonster(Monster monster){
 
 //1.1 사용자가 용사 이름을 입력한다.
 //1.2 메모장에 있는 용사정보를 불러온다.
-void loadCharacterStats() {
-
+Character loadCharacterStats() {
   try {
     print("용사의 이름을 입력하세요.");
     String? name = stdin.readLineSync() ?? "";
-    if(name.isEmpty) {
+    if (name.isEmpty) {
       print("용사의 이름을 다시 입력해주세요.");
-      return;
+      exit(1);
     }
 
     final file = File('lib/character.txt');
     final contents = file.readAsStringSync();
     final stats = contents.split(',');
     if (stats.length != 3) throw FormatException('Invalid character data');
-      
+
     int health = int.parse(stats[0]);
     int attack = int.parse(stats[1]);
     int defense = int.parse(stats[2]);
-  
+
     Character character = Character(name, health, attack, defense);
-    character.CharaterStatus();
-    //
+    return character;
 
   } catch (e) {
     print('캐릭터 데이터를 불러오는 데 실패했습니다: $e');
@@ -152,9 +150,9 @@ class Game {
 
 void main(){
   
-
 print("게임을 시작합시다.");
-loadCharacterStats();
+Character character = loadCharacterStats();
+character.CharacterStatus;
 
 print("앗! 불량한 몬스터가 나타났다!!!!!!");
 //2.3 랜덤으로 선택한 몬스터를 출력
